@@ -1,11 +1,11 @@
 # ha_sensit
-Appdaemon app to read a Kingspan Sensit tank meter and write to Home Assistant via MQTT
+Appdaemon app to read a Kingspan Sensit tank meter and write to Home Assistant via MQTT. For this to work you will have to have already set up the [Watchman Sensit Hardware and App](https://www.kingspan.com/gb/en/products/tank-monitoring/remote-tank-monitoring/watchman-sensit-smart-wifi-tank-level-monitoring-kit/). This app uses code from [Jon Connell's Kingspan Connect](https://github.com/masaccio/kingspan-connect-sensor).
 
 <H1>AppDaemon and MQTT Installation</H1>
 
 Install [AppDaemon](https://appdaemon.readthedocs.io/en/latest/INSTALL.html)<br>
 Install [Mosquitto MQTT Broker](https://github.com/home-assistant/addons/tree/master/mosquitto)<br>
-Configure [AppDaemon's HASS and MQTT plugins](https://appdaemon.readthedocs.io/en/latest/CONFIGURE.html): the *appdaemon.yaml* file in this repo
+Configure [AppDaemon's HASS and MQTT plugins](https://appdaemon.readthedocs.io/en/latest/CONFIGURE.html): the _appdaemon.yaml_ file in this repo
 should have most of the configuration required.<br>
 
 Install [MQTT Explorer](http://mqtt-explorer.com/) or equivalent somewhere on your network so you can check the MQTT broker is working correctly.<br>
@@ -14,10 +14,22 @@ At this point you might want to write a simple AppDaemon app to check that it is
 There are some useful guides [here](https://medium.com/@marcelblijleven/appdaemon-part-1-e63d1bffe7ca) and
 [here](https://webworxshop.com/getting-started-with-appdaemon-for-home-assistant/)<br>
 
+<H1>Add the Zeep Module to AppDaemon</h1>
+You need the Zeep SOAP module installed to be able to communicate with the Sensit server.<br>
+
+Go to [AppDaemon's Configuration Page](http://homeassistant.local:8123/hassio/addon/a0d7b954_appdaemon/config). Click on the 3 dots and *Edit in YAML*:<br>
+
+    init_commands: []
+    python_packages:
+      - zeep
+    system_packages: []
+    
+**Save** and **Restart** AppDaemon
+
 <H1>The Tank App</H1>
-Copy *tanks.py* from the *apps* folder to *config/appdaemon/apps*<br>
-Merge the contents of *apps.yampl* into the *apps.yaml* file in *config/appdaemon/apps*<br>
-Add two secrets to your *config/secrets.yaml* file:<br>
+Copy _tanks.py_ from the _apps_ folder to _config/appdaemon/apps_<br>
+Merge the contents of _apps.yampl_ into the _apps.yaml_ file in _config/appdaemon/apps_<br>
+Add two secrets to your _config/secrets.yaml_ file:<br>
 
     sensit_user: email_address_from_sensit_app
     sensit_pass: password_from_sensit_app
