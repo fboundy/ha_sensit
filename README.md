@@ -60,5 +60,11 @@ In **MQTT Explorer** connect to your HA MQTT Broker. You should see:
         homeassistant
             sensor
                 tank(1 topic, 1 message)
+                tank_level(1 topic, 1 message)
+                tank_percent(1 topic, 1 message)
+                tank_last_read(1 topic, 1 message)
+                tank_rate(1 topic, 1 message)
+                tank_predicted_empty(1 topic, 1 message)
+                tank_energy(1 topic, 1 message)
       
-
+Through [MQTT Discovery](https://www.home-assistant.io/integrations/mqtt/#mqtt-discovery) you should also now have the equivalent sensor entities in Home Assistant
