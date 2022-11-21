@@ -1,0 +1,43 @@
+---
+secrets: /config/secrets.yaml
+
+logs:
+  main_log:
+    filename: /share/logs/appdaemon.log
+  access_log:
+    filename: /share/logs/access.log
+  error_log:
+    filename: /share/logs/error.log
+  diag_log:
+    filename: /share/logs/diag.log
+
+appdaemon:
+  latitude: 54.729
+  longitude: -2.991
+  elevation: 175
+  time_zone: Europe/London
+  plugins:
+    HASS:
+      type: hass
+      ha_url: *your_ha_ip*:8123
+      token: *yourtoken*
+
+    MQTT:
+      type: mqtt
+      namespace: mqtt # needed
+      verbose: True
+      client_host: core-mosquitto
+      client_port: 1883
+      client_id: localad
+      event_name: MQTT_MESSAGE # the event you will listen in your module
+      client_topics: NONE      
+      client_user: !secret mqtt-user
+      client_password: !secret mqtt-password
+
+      
+http:
+  url: http://127.0.0.1:5050
+admin:
+api:
+hadashboard:
+  dash_url: *your_ha_ip*:5050

@@ -1,0 +1,5 @@
+tank:
+  module: tank
+  class: Tank
+  sensit_user: !secret sensit_user
+  sensit_pass: !secret sensit_pass
